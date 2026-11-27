@@ -15,7 +15,7 @@ cuando corresponda; ocultar credenciales, `.env`, estados y valores secretos.
 | `04a-local-lint.png` | Salida correcta de `npm run lint` | 1 |
 | `04b-local-test.png` | Prueba de integración aprobada | 1 |
 | `04c-local-build.png` | Panel compilado correctamente | 1 |
-| `05-github-repos.png` | Dos repos propios | 2 |
+| `05-github-repos.png` | Repositorio propio con las cuatro carpetas de `entrega/` | 2 |
 | `06-presupuesto.png` | Presupuesto GCP propio | 3 |
 | `07-conexion-github.png` | Conexión 2nd gen | 3 |
 | `08-bootstrap-plan.png` | Resumen del plan sin secretos | 4 |
