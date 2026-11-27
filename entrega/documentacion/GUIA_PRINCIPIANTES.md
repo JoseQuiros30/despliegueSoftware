@@ -7,9 +7,10 @@ la palabra `TU_CORREO` literalmente: reemplázala con tu dirección real.
 El ID del proyecto ya está indicado. Si cierras Terminal, vuelve a definir
 las variables del paso 4.
 
-La solución ya fue validada localmente. **Aún no existe ningún recurso GCP de
-esta entrega.** Los pasos 1 a 3 no aprovisionan nube. Del paso 4 en adelante,
-revisa primero el presupuesto: Cloud SQL factura mientras exista. La base
+La solución fue validada localmente y está desplegada en GCP para la
+demostración. Los pasos 1 a 6 documentan cómo reproducir lo ya ejecutado;
+continúa con las pruebas del servicio y, al terminar, con la eliminación.
+Cloud SQL factura mientras exista. La base
 estimada en `us-central1` para 48 horas es USD 0,62 por instancia `db-f1-micro`
 y 10 GiB HDD; no incluye builds, imágenes, buckets, secretos, red ni impuestos.
 [Precios oficiales](https://cloud.google.com/sql/pricing?hl=en). Un presupuesto
@@ -270,7 +271,8 @@ curl -fsS "$SERVICE_URL/api/health"
 Abre en el navegador `SERVICE_URL/admin` sustituyendo `SERVICE_URL` por la URL
 que imprimió Terminal. Crea el administrador cloud (es independiente del local).
 Publica un artículo de prueba con título, resumen, contenido y categoría.
-En **Media Library**, sube una imagen pequeña y comprueba que abre. Después:
+En **Media Library**, pulsa **New → File upload** (o **Add assets** si la
+biblioteca está vacía), sube una imagen pequeña y comprueba que abre. Después:
 
 ```bash
 curl -fsS "$SERVICE_URL/api/articulos?status=published"
@@ -283,16 +285,16 @@ La API debe mostrar el artículo y el bucket debe mostrar el archivo. Captura
 el error real y consulta logs; el montaje GCS FUSE solo puede verificarse al
 ejecutarlo en Cloud Run.
 
-## 10. Demostrar CI/CD sin alterar la aplicación
+## 10. Demostrar CI/CD y una nueva revisión
 
-En el repositorio **propio** `despliegueSoftware` de tu Mac:
+La rama `evidencia-cicd` ya está preparada con la documentación verificada y
+una pequeña actualización del README de la aplicación. En el repositorio
+**propio** `despliegueSoftware` de tu Mac, comprueba que está publicada:
 
 ```bash
 cd /Applications/MAMP/htdocs/despliegueSoftware
-git switch -c evidencia-cicd
-printf '\nPrueba de CI/CD de la Actividad 5.\n' >> entrega/demo-strapi/README.md
-git add entrega/demo-strapi/README.md
-git commit -m 'Demostrar pipeline de aplicacion'
+git switch evidencia-cicd
+git status --short
 git push -u origin evidencia-cicd
 ```
 

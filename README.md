@@ -15,5 +15,7 @@ o la [guía interactiva](entrega/documentacion/GUIA_INTERACTIVA.html). La
 qué revisar antes de crear recursos facturables.
 
 Los proyectos de referencia y las herramientas instaladas localmente quedan
-fuera de este repositorio. Ningún recurso de Google Cloud se ha aprovisionado
-como parte de la preparación local.
+fuera de este repositorio. El proyecto GCP de demostración está desplegado:
+Cloud Run y Cloud SQL responden correctamente. Al terminar las evidencias,
+seguir la [guía de eliminación](entrega/documentacion/GUIA_ELIMINACION_RECURSOS.md)
+para detener los costos.

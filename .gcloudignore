@@ -7,6 +7,10 @@
 /entrega/documentacion/
 /entrega/iac-strapi-gcp-cicd/
 **/node_modules/
+**/.tmp/
+**/.strapi/
+**/.strapi-updater.json
+**/*.db
 **/.env
 **/.env.*
 !**/.env.example

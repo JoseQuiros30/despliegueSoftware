@@ -14,16 +14,16 @@ resource "google_cloud_run_v2_service" "app" {
       max_instance_count = 1
     }
     volumes {
-      name = "cloudsql"
-      cloud_sql_instance { instances = [var.connection_name] }
-    }
-    volumes {
       name = "uploads"
       gcs {
         bucket        = var.uploads_bucket
         read_only     = false
         mount_options = ["uid=1000", "gid=1000"]
       }
+    }
+    volumes {
+      name = "cloudsql"
+      cloud_sql_instance { instances = [var.connection_name] }
     }
     containers {
       name  = "strapi"
@@ -34,12 +34,12 @@ resource "google_cloud_run_v2_service" "app" {
         cpu_idle = true
       }
       volume_mounts {
-        name       = "cloudsql"
-        mount_path = "/cloudsql"
-      }
-      volume_mounts {
         name       = "uploads"
         mount_path = "/opt/app/public/uploads"
+      }
+      volume_mounts {
+        name       = "cloudsql"
+        mount_path = "/cloudsql"
       }
       env {
         name  = "NODE_ENV"
