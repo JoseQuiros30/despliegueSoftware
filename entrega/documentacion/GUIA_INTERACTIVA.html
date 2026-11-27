@@ -86,15 +86,14 @@ export GITHUB_OWNER=__OWNER__
 export ALERT_EMAIL=__EMAIL__
 gcloud auth login
 gcloud auth application-default login
-gcloud config set project "$PROJECT_ID"
-gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com iam.googleapis.com secretmanager.googleapis.com --project "$PROJECT_ID"</pre></div>
+gcloud config set project "$PROJECT_ID"</pre></div>
+<p>Después de revisar el presupuesto, habilita los servicios previos a Cloud Build:</p><div class="cmd"><button class="copy">Copiar</button><pre>gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com iam.googleapis.com secretmanager.googleapis.com --project "$PROJECT_ID"</pre></div>
 <p>En <em>Cloud Build → Repositories → 2nd gen</em>, crea una conexión GitHub de nombre <code>github</code> en la región elegida, autoriza e instala la GitHub App en <code>despliegueSoftware</code>.</p>
 <div class="shots"><strong>Capturas:</strong> 06-presupuesto.png y 07-conexion-github.png.</div><label class="done"><input type="checkbox" data-step="3"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">4</span><h2>Planificar y aplicar bootstrap</h2><span class="tag cloud">nube</span></summary><div class="body">
-<p>Copia el tfvars ejemplo y edita <code>project_id</code>, <code>github_owner</code>, región y prefijo. Revisa la lista de recursos antes de aplicar.</p>
+<p>El <code>terraform.tfvars</code> local ya tiene el ID de proyecto. No lo sobrescribas con el ejemplo. Revisa la lista de recursos antes de aplicar.</p>
 <div class="cmd"><button class="copy">Copiar</button><pre>cd /Applications/MAMP/htdocs/despliegueSoftware/entrega/iac-strapi-gcp-cicd/bootstrap
-cp terraform.tfvars.example terraform.tfvars
-nano terraform.tfvars
+terraform fmt -check terraform.tfvars
 terraform init
 terraform fmt -check
 terraform validate

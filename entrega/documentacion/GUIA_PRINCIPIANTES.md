@@ -169,15 +169,13 @@ En **Terminal**:
 
 ```bash
 cd /Applications/MAMP/htdocs/despliegueSoftware/entrega/iac-strapi-gcp-cicd/bootstrap
-cp terraform.tfvars.example terraform.tfvars
-nano terraform.tfvars
+terraform fmt -check terraform.tfvars
 ```
 
-Reemplaza `project_id` por el proyecto GCP propio y comprueba que
-`github_owner = "JoseQuiros30"` y `app_repo_name = "despliegueSoftware"`.
-`region` debe seguir
-igual que la conexión (`us-central1`). Para guardar en `nano`: `Ctrl+O`, Enter,
-`Ctrl+X`. Después:
+El archivo `terraform.tfvars` ya contiene el ID de proyecto real y está
+ignorado por Git. Comprueba que `github_owner = "JoseQuiros30"`,
+`app_repo_name = "despliegueSoftware"` y `region = "us-central1"`.
+No copies el ejemplo encima del archivo preparado. Después:
 
 ```bash
 terraform init

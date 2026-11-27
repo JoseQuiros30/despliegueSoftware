@@ -94,6 +94,11 @@ export ALERT_EMAIL=TU_CORREO@EJEMPLO.COM
 gcloud auth login
 gcloud auth application-default login
 gcloud config set project "$PROJECT_ID"
+```
+
+Tras verificar presupuesto y costo, habilitar los prerrequisitos:
+
+```bash
 gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com iam.googleapis.com secretmanager.googleapis.com --project "$PROJECT_ID"
 ```
 
@@ -105,11 +110,11 @@ en el repositorio `despliegueSoftware`. **Captura:** `07-conexion-github.png`.
 
 ```bash
 cd /Applications/MAMP/htdocs/despliegueSoftware/entrega/iac-strapi-gcp-cicd/bootstrap
-cp terraform.tfvars.example terraform.tfvars
+terraform fmt -check terraform.tfvars
 ```
 
-Editar `terraform.tfvars`: `project_id`, `github_owner`, región y prefijo. El
-archivo real está ignorado por Git. Después de revisar el plan:
+`terraform.tfvars` local ya contiene el ID de proyecto real y está ignorado
+por Git. No sobrescribirlo con el ejemplo. Después de revisar el plan:
 
 ```bash
 terraform init
