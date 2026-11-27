@@ -26,7 +26,7 @@ el nombre que corresponda en el
 ```bash
 export BASE=/Applications/MAMP/htdocs/despliegueSoftware/entrega
 mkdir -p "$BASE/evidencias"
-screencapture -i "$BASE/evidencias/00-versiones.png"
+screencapture -i "$BASE/evidencias/06-presupuesto.png"
 ```
 
 Repite el último comando cambiando el nombre. Muestra URL, nombre del recurso o
@@ -53,8 +53,8 @@ git --version
 Se espera Node `v22...`, Terraform `v1.16.6` y una versión de Google Cloud CLI.
 El aviso de Terraform sobre una versión más reciente no impide ejecutar este
 proyecto. **Repite la línea `export PATH=...` cada vez que abras una Terminal
-nueva.** Guarda `00-versiones.png`. La actualización de Xcode se puede hacer
-después de entregar; no es necesaria para este despliegue.
+nueva.** No hace falta una captura adicional de versiones: las validaciones
+quedaron registradas en `../evidencias/VALIDACIONES_LOCALES.md`.
 
 ## 2. Demostrar Strapi en tu Mac
 
@@ -85,9 +85,9 @@ curl -fsS http://localhost:1337/api/health
 curl -fsS 'http://localhost:1337/api/articulos?status=published'
 ```
 
-Se espera `"status":"ok"` y el título del artículo en JSON. Captura
-`03-local-api.png`. Captura las salidas exitosas de `lint`, `test` y `build`
-como `04a-local-lint.png`, `04b-local-test.png` y `04c-local-build.png`.
+Se espera `"status":"ok"` y el título del artículo en JSON. La captura
+`03-local-api.png` ya está guardada y las validaciones constan por escrito;
+no repitas las capturas locales.
 Puedes detener Strapi con `Ctrl+C` en la primera
 terminal. `npm run setup` crea `.env` local; nunca lo publiques.
 
@@ -108,8 +108,9 @@ git push -u origin main
 Si el commit local ya está sincronizado, Git dirá `Everything up-to-date`.
 Comprueba que la lista de archivos no incluya `.env`, `node_modules`,
 `.terraform`, `*.tfstate`, `*.tfvars` reales, `referencias/`,
-`cms-strapi-gcp/` ni `.herramientas/`. Abre el repositorio en GitHub y toma
-`05-github-repos.png` mostrando `entrega/` y sus cuatro carpetas.
+`cms-strapi-gcp/` ni `.herramientas/`. El enlace
+`https://github.com/JoseQuiros30/despliegueSoftware` demuestra la publicación;
+no hace falta una captura adicional.
 
 ## 4. Revisar costos, crear proyecto y autenticarte
 

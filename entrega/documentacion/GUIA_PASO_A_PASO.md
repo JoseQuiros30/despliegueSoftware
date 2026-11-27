@@ -54,9 +54,10 @@ Abrir `http://localhost:1337/admin`, crear administrador y un Artículo con
 curl -fsS 'http://localhost:1337/api/articulos?status=published'
 ```
 
-**Capturas:** `01-local-admin.png`, `02-local-articulo.png`,
-`03-local-api.png`, `04a-local-lint.png`, `04b-local-test.png` y
-`04c-local-build.png`. Ocultar contraseña y `.env`.
+**Evidencia ya guardada:** `01-local-admin.png`, `02-local-articulo.png`,
+`03-local-api.png` y las capturas complementarias de `evidencias/`.
+Las salidas de validación están documentadas en
+`../evidencias/VALIDACIONES_LOCALES.md`. Ocultar contraseña y `.env`.
 
 ## 2. Publicar el repositorio GitHub
 
@@ -72,8 +73,8 @@ git push -u origin main
 ```
 
 Confirmar que no se subieron `.env`, estados, `terraform.tfvars`,
-`node_modules`, `referencias/` ni `cms-strapi-gcp/`. **Captura:**
-`05-github-repos.png` con las cuatro carpetas de `entrega/` visibles.
+`node_modules`, `referencias/` ni `cms-strapi-gcp/`. El enlace público a
+`https://github.com/JoseQuiros30/despliegueSoftware` es la evidencia de GitHub.
 
 ## 3. Revisar costos y preparar GCP
 

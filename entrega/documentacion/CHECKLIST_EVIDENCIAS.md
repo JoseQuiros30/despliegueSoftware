@@ -1,21 +1,18 @@
 # Checklist de evidencias reales
 
-Guardar imágenes en `../evidencias/`. Capturar URL, fecha y nombre del proyecto
-cuando corresponda; ocultar credenciales, `.env`, estados y valores secretos.
+Guardar imágenes en `../evidencias/`. Esta tabla propone pruebas de hitos
+distintos: una misma captura puede demostrar varios y no hay que repetir
+pantallas equivalentes. Capturar URL, fecha y nombre del proyecto cuando
+corresponda; ocultar credenciales, `.env`, estados y valores secretos.
 
 | Archivo | Qué mostrar | Paso |
 |---|---|---|
-| `00-versiones.png` | Node 22, Terraform, gcloud y Git instalados | 1 |
 | `01-local-admin.png` | Panel Strapi local | 1 |
 | `01b-local-arranque.png` | Terminal con Strapi iniciado | 1 |
 | `02-local-articulo.png` | Artículo publicado | 1 |
 | `02b-local-publicacion.png` | Confirmación de publicación | 1 |
 | `03-local-api.png` | JSON de `/api/articulos` | 1 |
 | `03b-local-health.png` | Health local `status: ok` | 1 |
-| `04a-local-lint.png` | Salida correcta de `npm run lint` | 1 |
-| `04b-local-test.png` | Prueba de integración aprobada | 1 |
-| `04c-local-build.png` | Panel compilado correctamente | 1 |
-| `05-github-repos.png` | Repositorio propio con las cuatro carpetas de `entrega/` | 2 |
 | `06-presupuesto.png` | Presupuesto GCP propio | 3 |
 | `07-conexion-github.png` | Conexión 2nd gen | 3 |
 | `08-bootstrap-plan.png` | Resumen del plan sin secretos | 4 |
@@ -44,3 +41,6 @@ cuando corresponda; ocultar credenciales, `.env`, estados y valores secretos.
 
 Las capturas de errores o alertas incidentales no se deben fabricar. Si una
 gráfica no tiene datos aún, esperar o anotar honestamente la limitación.
+Las validaciones de `lint`, `test`, `build`, versiones y Terraform constan en
+`../evidencias/VALIDACIONES_LOCALES.md`; el enlace al repositorio publicado
+demuestra GitHub. No se piden capturas adicionales de esas mismas salidas.

@@ -67,7 +67,7 @@ npm run start</pre></div>
 <p>En otra terminal:</p><div class="cmd"><button class="copy">Copiar</button><pre>curl -fsS http://localhost:1337/api/health
 curl -fsS 'http://localhost:1337/api/articulos?status=published'</pre></div>
 <p>Abre <code>http://localhost:1337/admin</code>, crea el administrador y publica un Artículo con título, resumen, contenido y una categoría del modelo original. La lectura anónima de publicados ya está definida en las rutas de la aplicación.</p>
-<div class="shots"><strong>Capturas:</strong> 00-versiones.png, 01-local-admin.png, 01b-local-arranque.png, 02-local-articulo.png, 02b-local-publicacion.png, 03-local-api.png, 03b-local-health.png, 04a-local-lint.png, 04b-local-test.png, 04c-local-build.png.</div><label class="done"><input type="checkbox" data-step="1"> Paso completado</label></div></details>
+<div class="shots"><strong>Evidencias ya guardadas:</strong> 01-local-admin.png, 01b-local-arranque.png, 02-local-articulo.png, 02b-local-publicacion.png, 03-local-api.png y 03b-local-health.png. Las validaciones están en VALIDACIONES_LOCALES.md; no se necesitan más capturas locales.</div><label class="done"><input type="checkbox" data-step="1"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">2</span><h2>Publicar el repositorio GitHub</h2><span class="tag">local</span></summary><div class="body">
 <p>Usa el repositorio <code>JoseQuiros30/despliegueSoftware</code>. Git se configura en la raíz y solo incluye la entrega; los originales, secretos y estados están ignorados.</p>
 <div class="cmd"><button class="copy">Copiar</button><pre>cd /Applications/MAMP/htdocs/despliegueSoftware
@@ -75,7 +75,7 @@ git status --short
 git ls-files | head
 git remote -v
 git push -u origin main</pre></div>
-<div class="shots"><strong>Captura:</strong> 05-github-repos.png.</div><label class="done"><input type="checkbox" data-step="2"> Paso completado</label></div></details>
+<div class="shots"><strong>Evidencia:</strong> <a href="https://github.com/JoseQuiros30/despliegueSoftware" target="_blank" rel="noopener">repositorio publicado en GitHub</a>. No se necesita captura adicional.</div><label class="done"><input type="checkbox" data-step="2"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">3</span><h2>Revisar costo y preparar proyecto GCP</h2><span class="tag cloud">nube</span></summary><div class="body">
 <ol><li>Crea un proyecto GCP propio y asocia facturación.</li><li>Configura un presupuesto con alertas. El presupuesto no detiene gastos.</li><li>Confirma fecha y hora de eliminación prevista.</li></ol>
 <div class="cmd"><button class="copy">Copiar</button><pre>export PROJECT_ID=__PROJECT__

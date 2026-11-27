@@ -15,8 +15,7 @@ ninguna captura original se borró.
 
 La base `demo-strapi/.tmp/data.db` contiene una versión publicada del artículo
 `Prueba Articulo`. Se consultó la API local en vivo y respondió HTTP 200 con
-ese artículo y `total: 1`; la implementación funciona. Para cerrar la etapa
-faltan `00-versiones.png` y capturas de `lint`, `test` y `build`
-(`04a`, `04b`, `04c`). El servidor
-local está escuchando en `localhost:1337`. No se observaron secretos en las
-capturas inspeccionadas.
+ese artículo y `total: 1`; la implementación funciona. La etapa local queda
+documentada con estas seis capturas y `VALIDACIONES_LOCALES.md`; las versiones,
+`lint`, `test` y `build` no requieren capturas repetidas. No se observaron
+secretos en las capturas inspeccionadas.
