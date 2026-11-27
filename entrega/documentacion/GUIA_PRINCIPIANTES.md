@@ -114,6 +114,12 @@ no hace falta una captura adicional.
 
 ## 4. Revisar costos, crear proyecto y autenticarte
 
+Si todavía no tienes proyecto, abre **Google Cloud Console → IAM y
+administración → Administrar recursos → Crear proyecto**. Elige un nombre
+descriptivo y anota el **ID de proyecto** que muestra la consola; es el valor
+que sustituye `TU_PROYECTO_GCP`. Antes de habilitar servicios o ejecutar
+Terraform, lee la [revisión de costos](REVISION_COSTOS.md).
+
 En **Consola Google Cloud**: crea o selecciona un proyecto **propio**, vincula
 una cuenta de facturación y ve a **Billing → Budgets & alerts**. Crea un
 presupuesto pequeño y alertas; anota la hora en que destruirás la infraestructura.

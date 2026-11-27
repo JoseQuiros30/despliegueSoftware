@@ -18,3 +18,5 @@ comandos adaptados a su proyecto y marcar el avance. La versi√≥n imprimible est√
 `documentacion/GUIA_PASO_A_PASO.md`.
 Para una primera experiencia con Strapi, Terraform y GCP, seguir
 `documentacion/GUIA_PRINCIPIANTES.md`.
+Antes de aprovisionar Google Cloud, revisar
+`documentacion/REVISION_COSTOS.md` y el presupuesto del proyecto propio.
