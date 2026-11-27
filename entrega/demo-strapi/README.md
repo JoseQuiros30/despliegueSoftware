@@ -43,3 +43,7 @@ después del aprovisionamiento.
 por SHA, despliega por digest y verifica `/api/health`. Si falla el smoke test,
 devuelve el tráfico a la revisión anterior. La guía de implementación está en
 `../documentacion/GUIA_INTERACTIVA.html`.
+
+La respuesta de `/api/health` incluye `revision`: `bootstrap` para la imagen
+inicial y el SHA corto del commit después de un despliegue desde `main`. Esto
+permite comprobar que el pipeline sirvió una revisión nueva sin mostrar secretos.

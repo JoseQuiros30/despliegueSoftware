@@ -9,14 +9,16 @@ Cloud Build usa `entrega/demo-strapi/cloudbuild.yaml` desde la raíz del reposit
 | `demo-strapi/` | CMS Strapi 5 basado en `cms-strapi-gcp`, Dockerfile, Cloud Build y pruebas |
 | `iac-strapi-gcp-cicd/` | Bootstrap e infraestructura Terraform modular |
 | `documentacion/` | Guía interactiva, informe, matriz y eliminación |
-| `evidencias/` | Validaciones locales y capturas de nube pendientes |
+| `evidencias/` | Validaciones locales y capturas reales de nube |
 
-**No se han creado recursos en Google Cloud.** El despliegue real comienza solo
-después de revisar el costo y ejecutar los comandos de la guía. Abrir
+**Estado actual:** bootstrap e infraestructura GCP desplegados en
+`project-792d22c1-bc11-403b-96c`. Cloud Run responde en
+`https://strapi-a5-service-h72ufsk6ga-uc.a.run.app/api/health`. Faltan la
+prueba de contenido, el PR de CI/CD y las evidencias finales. Abrir
 `documentacion/GUIA_INTERACTIVA.html` en un navegador para seguir los pasos con
 comandos adaptados a su proyecto y marcar el avance. La versión imprimible está en
 `documentacion/GUIA_PASO_A_PASO.md`.
 Para una primera experiencia con Strapi, Terraform y GCP, seguir
 `documentacion/GUIA_PRINCIPIANTES.md`.
-Antes de aprovisionar Google Cloud, revisar
-`documentacion/REVISION_COSTOS.md` y el presupuesto del proyecto propio.
+Revisar `documentacion/REVISION_COSTOS.md` y, tras las pruebas, ejecutar
+`documentacion/GUIA_ELIMINACION_RECURSOS.md` para retirar Cloud SQL y Cloud Run.

@@ -46,7 +46,7 @@ resource "google_logging_metric" "build_failures" {
 
 resource "google_logging_metric" "app_errors" {
   name   = "${var.prefix}-app-errors"
-  filter = "${local.run_filter} AND severity>=ERROR"
+  filter = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"${var.service_name}\" AND severity>=ERROR"
   metric_descriptor {
     metric_kind = "DELTA"
     value_type  = "INT64"

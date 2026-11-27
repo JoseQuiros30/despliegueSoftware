@@ -32,7 +32,7 @@ button{background:var(--blue);color:white;border:0;border-radius:6px;font:inheri
 <header><div class="eyebrow">Actividad 5 · ITM · 27 nov 2026</div><h1>Implementación paso a paso</h1>
 <p>Strapi 5, Terraform, Cloud Build y observabilidad. Completa tus datos; los comandos se actualizan y puedes marcar el avance. El progreso se guarda en este navegador.</p></header>
 <main>
-<div class="notice"><strong>Estado:</strong> el código está preparado y validado localmente. Ningún recurso de GCP se ha creado. Los pasos de nube implican facturación y requieren tu revisión del presupuesto y del plan Terraform antes de ejecutarse.</div>
+<div class="notice"><strong>Estado:</strong> bootstrap e infraestructura están desplegados en <code>project-792d22c1-bc11-403b-96c</code>. Cloud Run y Cloud SQL responden. Completa las pruebas de contenido y CI/CD; después ejecuta el paso de eliminación para detener los cargos. Los pasos anteriores quedan como instrucciones reproducibles.</div>
 <div class="grid"><aside class="side">
 <h2>Datos de tu despliegue</h2>
 <label for="project">ID del proyecto GCP</label><input id="project" type="text" value="project-792d22c1-bc11-403b-96c" spellcheck="false">
@@ -131,7 +131,7 @@ terraform apply infra.tfplan
 terraform output</pre></div>
 <p>Comprueba también el bucket privado <code>__PROJECT__-__PREFIX__-uploads</code> y su montaje en Cloud Run.</p><div class="shots"><strong>Capturas:</strong> 11-infra-plan.png, 12-cloud-run.png, 13-cloud-sql.png, 14-secret-manager.png.</div><label class="done"><input type="checkbox" data-step="6"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">7</span><h2>Demostrar el CMS y la API</h2><span class="tag cloud">nube</span></summary><div class="body">
-<p>Comprueba health, abre <code>$SERVICE_URL/admin</code>, crea el administrador y publica un Artículo. Sube un archivo pequeño en Media Library y comprueba que abre desde el CMS. Las rutas públicas solo devuelven contenidos publicados.</p>
+<p>Comprueba health, abre <code>$SERVICE_URL/admin</code>, crea el administrador y publica un Artículo. En Media Library usa <strong>New → File upload</strong> (o <strong>Add assets</strong> si está vacía), sube una imagen pequeña y comprueba que abre. Las rutas públicas solo devuelven contenidos publicados.</p>
 <div class="cmd"><button class="copy">Copiar</button><pre>export REGION=__REGION__
 export PREFIX=__PREFIX__
 export SERVICE_URL="$(gcloud run services describe "$PREFIX-service" --region "$REGION" --format='value(status.url)')"
@@ -140,7 +140,7 @@ curl -fsS "$SERVICE_URL/api/articulos?status=published"
 gcloud storage ls "gs://__PROJECT__-__PREFIX__-uploads/"</pre></div>
 <div class="shots"><strong>Capturas:</strong> 15-cloud-admin.png, 16-cloud-articulo.png, 17-cloud-api.png, 17b-cloud-uploads.png.</div><label class="done"><input type="checkbox" data-step="7"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">8</span><h2>Comprobar PR, main y persistencia</h2><span class="tag cloud">nube</span></summary><div class="body">
-<p>Crea una rama de demostración, cambia una descripción visible, abre PR. Verifica build sin deploy. Fusiona a <code>main</code> y comprueba nueva revisión, SHA del health, Artículo y archivo que ya existían.</p>
+<p>La rama <code>evidencia-cicd</code> está preparada. Abre un PR hacia <code>main</code> y verifica el build sin deploy. Fusiona el PR y comprueba la nueva revisión, el SHA del health, el Artículo y el archivo que ya existían.</p>
 <div class="cmd"><button class="copy">Copiar</button><pre>gcloud builds list --region "__REGION__" --limit=10
 gcloud run revisions list --service "__PREFIX__-service" --region "__REGION__"
 curl -fsS "$SERVICE_URL/api/health"

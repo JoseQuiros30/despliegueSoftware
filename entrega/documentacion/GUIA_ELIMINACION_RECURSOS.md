@@ -35,3 +35,22 @@ Las APIs pueden seguir habilitadas (`disable_on_destroy=false`), pero no se
 deben mantener recursos de pago. Conservar o borrar de forma segura el estado
 local de bootstrap. Si el bucket queda con versiones, volver a listar y borrar
 solo después de confirmar que infra está destruida.
+
+La conexión host `github` se creó fuera de Terraform, y `gcloud builds submit`
+creó un bucket temporal de fuentes. Después de destruir `bootstrap` y de
+guardar la evidencia de los builds, revisar y eliminar estos dos recursos:
+
+```bash
+export REGION=us-central1
+gcloud builds connections describe github --region "$REGION" --project "$PROJECT_ID"
+gcloud builds connections delete github --region "$REGION" --project "$PROJECT_ID" --quiet
+gcloud storage ls --recursive "gs://${PROJECT_ID}_cloudbuild/"
+```
+
+Si el bucket `${PROJECT_ID}_cloudbuild` contiene solo archivos de esta
+actividad, eliminarlo con `gcloud storage rm --recursive
+"gs://${PROJECT_ID}_cloudbuild"`. No eliminar objetos de otros trabajos.
+Cloud Storage aplica por defecto una retención recuperable de siete días a
+objetos y buckets borrados; esta protección permanece activa y puede causar un
+residuo de almacenamiento pequeño durante ese plazo. Verificar en Facturación
+que desaparecen los servicios principales, en especial Cloud SQL.

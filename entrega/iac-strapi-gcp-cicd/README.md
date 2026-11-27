@@ -5,7 +5,9 @@ y versionado para el estado, Artifact Registry, cuenta de Cloud Build y triggers
 aplicación. `infra/` crea Cloud SQL PostgreSQL, secretos, Cloud Run, bucket de
 uploads y observabilidad.
 
-**Estado actual:** solo validado localmente; no se ejecutó `apply`.
+**Estado actual:** bootstrap e infra aplicados en
+`project-792d22c1-bc11-403b-96c`. Cloud Run y Cloud SQL están listos; la
+prueba de PR/main y la eliminación quedan pendientes.
 
 ## Orden de despliegue
 
@@ -17,7 +19,9 @@ uploads y observabilidad.
 
 El backend GCS se configura con `terraform init -reconfigure -backend-config="bucket=..."
 -backend-config="prefix=strapi-a5/infra"`; no hay ID de proyecto del profesor en el
-código. **No ejecutar `apply` ni `destroy` antes de revisar el plan y el presupuesto.**
+código. Revisar siempre el plan y el presupuesto antes de aplicar cambios;
+al terminar la demostración, seguir la guía de eliminación en
+`../documentacion/GUIA_ELIMINACION_RECURSOS.md`.
 
 Documentación: [arquitectura](docs/1-Architecture.md),
 [infraestructura](docs/2-Infrastructure.md), [CI/CD](docs/3-CI-CD.md),

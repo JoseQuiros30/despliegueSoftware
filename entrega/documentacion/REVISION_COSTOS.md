@@ -1,9 +1,10 @@
 # Revisión de costos antes del despliegue
 
-**Estado:** no hay un proyecto GCP configurado en este Mac. Esta revisión se
-basa en el código Terraform y en la región propuesta `us-central1`; no es una
-cotización ni una factura. No se han ejecutado `terraform apply`, builds ni
-despliegues de esta entrega.
+**Estado:** el proyecto `project-792d22c1-bc11-403b-96c` está desplegado en
+`us-central1` para la demostración. Esta estimación se basa en tarifas
+publicadas; no es una cotización ni una factura. Bootstrap, Cloud Build e
+infraestructura ya se aplicaron. Cloud SQL comienza a generar cargos desde su
+creación, por lo que se debe destruir al finalizar las evidencias.
 
 El proyecto para la práctica es `project-792d22c1-bc11-403b-96c` y el usuario
 confirmó que tiene vinculada la cuenta «Mi cuenta de facturación». La pantalla
@@ -11,7 +12,7 @@ de **Crear una instancia** de Compute Engine mostraba una VM `e2-medium` con
 estimación de USD 25,46/mes: **esa VM no pertenece a este diseño y debe
 cancelarse**. La infraestructura prevista se enumera abajo.
 
-## Recursos previstos
+## Recursos desplegados
 
 | Componente | Configuración en Terraform | Costo que se debe vigilar |
 | --- | --- | --- |
@@ -36,7 +37,14 @@ Manager, Monitoring y Cloud Build tienen [tarifas y cuotas propias](https://clou
 el total depende del tamaño real de la imagen, los builds y el tráfico. No se
 puede garantizar un total exacto antes de ejecutar la prueba.
 
-## Antes de crear recursos
+Cloud Storage conserva por defecto los objetos y buckets borrados durante
+siete días para recuperación. Se mantuvo esa protección para conservar la
+capacidad de recuperar el estado Terraform. Al eliminar la entrega puede quedar un costo residual
+pequeño por los pocos archivos retenidos; el costo importante a detener es la
+instancia Cloud SQL. La [guía de eliminación](GUIA_ELIMINACION_RECURSOS.md)
+incluye el bucket temporal de Cloud Build y su conexión GitHub.
+
+## Controles realizados antes de crear recursos
 
 1. Crear o elegir un proyecto propio y anotar el **ID**, no solo el nombre.
    Ver [crear proyectos](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects).
@@ -50,7 +58,6 @@ puede garantizar un total exacto antes de ejecutar la prueba.
 5. Completar `terraform.tfvars` y `prod.tfvars` con el ID real, revisar ambos
    `terraform plan` y el costo antes de cualquier `apply`.
 
-**Decisión pendiente:** el ID y la vinculación de facturación ya están
-confirmados; faltan presupuesto, revisión de planes Terraform y ventana de
-eliminación acordada. Hasta entonces, no ejecutar los comandos
-de aprovisionamiento del paso 4 en la guía.
+El usuario confirmó proyecto, facturación, presupuesto y autenticación; se
+revisaron ambos planes Terraform antes de aplicar. La eliminación queda para
+después de las pruebas y capturas, siguiendo la guía vinculada arriba.

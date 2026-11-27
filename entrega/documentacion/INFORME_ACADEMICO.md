@@ -87,23 +87,28 @@ para reducir costo: antes de destruir se debe exportar cualquier contenido útil
 La documentación de Strapi declara PostgreSQL compatible, pero advierte que
 Cloud SQL, como base «cloud native», no tiene soporte oficial de Strapi
 ([database configuration](https://docs.strapi.io/cms/configurations/database)).
-Por eso el arranque y CRUD en GCP están en la guía como comprobaciones pendientes;
-no se afirma que se hayan probado en nube.
+El arranque sí se comprobó en Cloud Run: la revisión está lista, Cloud SQL figura
+`RUNNABLE`, `/api/health` respondió 200 y el panel `/admin` abrió por HTTPS.
+El usuario publicó un artículo desde el panel y la API pública lo devolvió
+correctamente desde Cloud SQL.
 
 ## Resultados verificables y pendientes
 
 Las pruebas locales de lint, modelo, compilación del panel y `terraform validate`
-se documentan en `REVISION_REQUISITOS.md`. Las evidencias reales de GCP, CI/CD,
-persistencia y alertas permanecen pendientes hasta que el grupo apruebe el costo
-y ejecute la guía. No se presentan capturas ficticias.
+se documentan en `REVISION_REQUISITOS.md`. La aplicación de bootstrap e infra, el
+build inicial exitoso, Cloud SQL, Cloud Run, un artículo publicado y observabilidad
+IaC constan en `../evidencias/VALIDACIONES_GCP.md`. La prueba PR/main y la
+persistencia entre revisiones están pendientes. No se presentan
+capturas ficticias.
 
 ## Conclusiones
 
 La solución convierte el patrón de clase en una arquitectura Strapi más corta y
 económica para la Opción A. La separación bootstrap/infra permite auditar el plan
 antes de crear Cloud SQL; el pipeline distingue PR de despliegue y prepara
-rollback. La validación local cubre sintaxis y arranque SQLite; el rendimiento y
-la compatibilidad de Cloud SQL requieren prueba real tras la revisión de costos.
+rollback. La validación local cubre sintaxis y arranque SQLite; la prueba real
+confirmó el arranque de Strapi conectado a Cloud SQL y la publicación de un
+artículo. Falta comprobar la persistencia tras el despliegue por CI/CD.
 
 ## Referencias
 

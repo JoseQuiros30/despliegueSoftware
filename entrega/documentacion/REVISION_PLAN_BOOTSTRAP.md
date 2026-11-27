@@ -4,8 +4,9 @@
 
 El 27 de noviembre de 2026 se ejecutó `terraform plan` del módulo
 `bootstrap/` con acceso de solo lectura y `-refresh=false`. El plan se guardó
-localmente como `bootstrap.tfplan` (ignorado por Git). **No se ejecutó
-`terraform apply`.**
+localmente como `bootstrap.tfplan` (ignorado por Git). Después de revisar los
+21 recursos se ejecutó `terraform apply bootstrap.tfplan`, que terminó con
+`21 added, 0 changed, 0 destroyed`.
 
 | Tipo | Cantidad | Función |
 | --- | ---: | --- |
@@ -19,9 +20,10 @@ localmente como `bootstrap.tfplan` (ignorado por Git). **No se ejecutó
 | **Total** | **21** | Todos son recursos nuevos del plan |
 
 Este plan **no incluye VM, Cloud Run ni Cloud SQL**. El bucket y Artifact
-Registry pueden generar cargos según almacenamiento; los builds se cobrarán
-según uso y cuotas. Cloud SQL llegará en un plan separado de `infra/` y es el
-costo fijo principal descrito en [REVISION_COSTOS.md](REVISION_COSTOS.md).
+Registry pueden generar cargos según almacenamiento; los builds se cobran
+según uso y cuotas. Cloud SQL se creó después en el plan separado de `infra/`
+y es el costo fijo principal descrito en
+[REVISION_COSTOS.md](REVISION_COSTOS.md).
 
 **Estado de preparación:** proyecto activo y facturación habilitada. Se
 habilitaron las APIs de Cloud Build y Secret Manager. El primer intento de
@@ -33,6 +35,6 @@ Con autorización explícita del usuario, se concedió temporalmente
 La conexión `github` terminó en estado `COMPLETE`; se retiró el rol amplio y se
 verificó que ya no aparece en la política IAM del proyecto.
 
-La CLI de `gcloud` está autenticada. Las credenciales ADC que utiliza Terraform
-todavía no están configuradas; el usuario debe completar
-`gcloud auth application-default login` antes de aplicar cualquier plan.
+La CLI de `gcloud` y las credenciales ADC de Terraform quedaron autenticadas
+antes del `apply`. La conexión y los triggers se verificaron en Cloud Build;
+el build inicial de la imagen terminó con estado `SUCCESS`.
