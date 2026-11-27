@@ -5,6 +5,12 @@ basa en el código Terraform y en la región propuesta `us-central1`; no es una
 cotización ni una factura. No se han ejecutado `terraform apply`, builds ni
 despliegues de esta entrega.
 
+El proyecto para la práctica es `project-792d22c1-bc11-403b-96c` y el usuario
+confirmó que tiene vinculada la cuenta «Mi cuenta de facturación». La pantalla
+de **Crear una instancia** de Compute Engine mostraba una VM `e2-medium` con
+estimación de USD 25,46/mes: **esa VM no pertenece a este diseño y debe
+cancelarse**. La infraestructura prevista se enumera abajo.
+
 ## Recursos previstos
 
 | Componente | Configuración en Terraform | Costo que se debe vigilar |
@@ -37,13 +43,14 @@ puede garantizar un total exacto antes de ejecutar la prueba.
 2. Revisar si hay cuenta de facturación o crédito de prueba; nunca asumir que
    una cuota gratuita cubre toda la actividad.
 3. Crear un presupuesto de alerta para ese proyecto y fijar umbrales. Un
-   presupuesto **no detiene automáticamente los cargos**: ver
+   presupuesto de alertas **no detiene automáticamente los cargos**: ver
    [documentación de presupuestos](https://docs.cloud.google.com/billing/docs/how-to/budgets).
 4. Definir una ventana corta para la demostración y una hora para destruir
    `infra` y `bootstrap` con la [guía de eliminación](GUIA_ELIMINACION_RECURSOS.md).
 5. Completar `terraform.tfvars` y `prod.tfvars` con el ID real, revisar ambos
    `terraform plan` y el costo antes de cualquier `apply`.
 
-**Decisión pendiente:** ID de proyecto, facturación, presupuesto y planes
-Terraform revisados con el usuario. Hasta entonces, no ejecutar los comandos
+**Decisión pendiente:** el ID y la vinculación de facturación ya están
+confirmados; faltan presupuesto, revisión de planes Terraform y ventana de
+eliminación acordada. Hasta entonces, no ejecutar los comandos
 de aprovisionamiento del paso 4 en la guía.

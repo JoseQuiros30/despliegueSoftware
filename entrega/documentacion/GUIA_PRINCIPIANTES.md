@@ -3,9 +3,9 @@
 Esta guía está escrita para macOS y para la carpeta
 `/Applications/MAMP/htdocs/despliegueSoftware`. Usa **Terminal** para los bloques
 de comandos y el navegador para los pasos indicados como **Consola**. No pegues
-las palabras `TU_PROYECTO_GCP` ni `TU_CORREO` literalmente:
-reemplázalas con tus datos. Si cierras Terminal, vuelve a definir las variables
-del paso 4.
+la palabra `TU_CORREO` literalmente: reemplázala con tu dirección real.
+El ID del proyecto ya está indicado. Si cierras Terminal, vuelve a definir
+las variables del paso 4.
 
 La solución ya fue validada localmente. **Aún no existe ningún recurso GCP de
 esta entrega.** Los pasos 1 a 3 no aprovisionan nube. Del paso 4 en adelante,
@@ -114,11 +114,16 @@ no hace falta una captura adicional.
 
 ## 4. Revisar costos, crear proyecto y autenticarte
 
+Si la consola muestra **Crear una instancia** de Compute Engine con un
+`e2-medium` y un botón **Crear**, pulsa **Cancelar**: esta actividad no usa una
+VM. Strapi se desplegará en Cloud Run y PostgreSQL en Cloud SQL mediante
+Terraform. No crees recursos manuales desde las tarjetas de bienvenida.
+
 Si todavía no tienes proyecto, abre **Google Cloud Console → IAM y
 administración → Administrar recursos → Crear proyecto**. Elige un nombre
-descriptivo y anota el **ID de proyecto** que muestra la consola; es el valor
-que sustituye `TU_PROYECTO_GCP`. Antes de habilitar servicios o ejecutar
-Terraform, lee la [revisión de costos](REVISION_COSTOS.md).
+descriptivo y anota el **ID de proyecto** que muestra la consola. En esta
+entrega ya se eligió `project-792d22c1-bc11-403b-96c`. Antes de habilitar
+servicios o ejecutar Terraform, lee la [revisión de costos](REVISION_COSTOS.md).
 
 En **Consola Google Cloud**: crea o selecciona un proyecto **propio**, vincula
 una cuenta de facturación y ve a **Billing → Budgets & alerts**. Crea un
@@ -131,7 +136,7 @@ van antes de esos pasos.
 En **Terminal**, sustituye los tres valores de ejemplo:
 
 ```bash
-export PROJECT_ID=TU_PROYECTO_GCP
+export PROJECT_ID=project-792d22c1-bc11-403b-96c
 export REGION=us-central1
 export PREFIX=strapi-a5
 export GITHUB_OWNER=JoseQuiros30
@@ -228,7 +233,7 @@ nano env/prod.tfvars
 
 Sustituye `project_id`, `initial_image`, `build_service_account` y
 `alert_emails`. La imagen debe ser
-`us-central1-docker.pkg.dev/TU_PROYECTO_GCP/strapi-a5/strapi:bootstrap` usando
+`us-central1-docker.pkg.dev/project-792d22c1-bc11-403b-96c/strapi-a5/strapi:bootstrap` usando
 tu ID real. Guarda el archivo y ejecuta:
 
 ```bash

@@ -35,7 +35,7 @@ button{background:var(--blue);color:white;border:0;border-radius:6px;font:inheri
 <div class="notice"><strong>Estado:</strong> el código está preparado y validado localmente. Ningún recurso de GCP se ha creado. Los pasos de nube implican facturación y requieren tu revisión del presupuesto y del plan Terraform antes de ejecutarse.</div>
 <div class="grid"><aside class="side">
 <h2>Datos de tu despliegue</h2>
-<label for="project">ID del proyecto GCP</label><input id="project" type="text" value="TU_PROYECTO_GCP" spellcheck="false">
+<label for="project">ID del proyecto GCP</label><input id="project" type="text" value="project-792d22c1-bc11-403b-96c" spellcheck="false">
 <label for="owner">Usuario u organización GitHub</label><input id="owner" type="text" value="JoseQuiros30" spellcheck="false">
 <label for="email">Correo para alertas</label><input id="email" type="email" value="TU_CORREO@EJEMPLO.COM">
 <label for="region">Región</label><input id="region" type="text" value="us-central1">
@@ -77,6 +77,7 @@ git remote -v
 git push -u origin main</pre></div>
 <div class="shots"><strong>Evidencia:</strong> <a href="https://github.com/JoseQuiros30/despliegueSoftware" target="_blank" rel="noopener">repositorio publicado en GitHub</a>. No se necesita captura adicional.</div><label class="done"><input type="checkbox" data-step="2"> Paso completado</label></div></details>
 <details class="step"><summary><span class="num">3</span><h2>Revisar costo y preparar proyecto GCP</h2><span class="tag cloud">nube</span></summary><div class="body">
+<p>Esta actividad no requiere crear una VM de Compute Engine. Si abriste «Crear una instancia», pulsa «Cancelar». La aplicación se ejecutará en Cloud Run y la base de datos en Cloud SQL, creados con Terraform.</p>
 <ol><li>Crea un proyecto GCP propio y asocia facturación.</li><li>Configura un presupuesto con alertas. El presupuesto no detiene gastos.</li><li>Confirma fecha y hora de eliminación prevista.</li></ol>
 <div class="cmd"><button class="copy">Copiar</button><pre>export PROJECT_ID=__PROJECT__
 export REGION=__REGION__
@@ -163,7 +164,7 @@ gcloud builds list --region "__REGION__" --limit=10</pre></div>
 <script>
 const memoryStore={};const storage={getItem(key){try{return localStorage.getItem(key);}catch{return memoryStore[key]||null;}},setItem(key,value){memoryStore[key]=value;try{localStorage.setItem(key,value);}catch{}}};
 const inputs={project:document.getElementById('project'),owner:document.getElementById('owner'),email:document.getElementById('email'),region:document.getElementById('region'),prefix:document.getElementById('prefix')};
-for(const [key,input] of Object.entries(inputs)){const saved=storage.getItem('a5-'+key);if(saved)input.value=saved;}
+for(const [key,input] of Object.entries(inputs)){const saved=storage.getItem('a5-'+key);if(saved&&saved!=='TU_PROYECTO_GCP')input.value=saved;}
 const pres=[...document.querySelectorAll('.cmd pre')];for(const pre of pres)pre.dataset.original=pre.textContent;
 function refresh(){const values={__PROJECT__:inputs.project.value,__OWNER__:inputs.owner.value,__EMAIL__:inputs.email.value,__REGION__:inputs.region.value,__PREFIX__:inputs.prefix.value};for(const pre of pres){let value=pre.dataset.original;for(const [key,replacement] of Object.entries(values))value=value.replaceAll(key,replacement);pre.textContent=value;}for(const [key,input] of Object.entries(inputs))storage.setItem('a5-'+key,input.value);const hours=Number(document.getElementById('hours').value);document.getElementById('hoursOut').textContent=hours;document.getElementById('costOut').textContent='USD '+(hours*(0.0105+10*0.000246575)).toFixed(2).replace('.',',');}
 for(const input of Object.values(inputs))input.addEventListener('input',refresh);document.getElementById('hours').addEventListener('input',refresh);refresh();

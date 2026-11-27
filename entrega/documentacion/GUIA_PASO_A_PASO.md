@@ -86,7 +86,7 @@ No hay un límite automático de gasto por presupuesto. Registrar hora de inicio
 destrucción planificada. **Captura:** `06-presupuesto.png`.
 
 ```bash
-export PROJECT_ID=TU_PROYECTO_GCP
+export PROJECT_ID=project-792d22c1-bc11-403b-96c
 export REGION=us-central1
 export PREFIX=strapi-a5
 export GITHUB_OWNER=JoseQuiros30
