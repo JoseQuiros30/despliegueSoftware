@@ -1,0 +1,7 @@
+project_id         = "TU_PROYECTO_GCP"
+region             = "us-central1"
+prefix             = "strapi-a5"
+github_owner       = "JoseQuiros30"
+github_connection  = "github"
+app_repo_name      = "despliegueSoftware"
+main_branch        = "main"

@@ -1,0 +1,9 @@
+**/.terraform/
+**/*.tfstate*
+**/terraform.tfvars
+infra/env/*.tfvars
+**/tfplan*
+**/*.tfplan
+**/*.tfplan.*
+**/crash.log
+**/.terraform.tfstate.lock.info

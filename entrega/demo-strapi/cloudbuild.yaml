@@ -1,0 +1,95 @@
+substitutions:
+  _REGION: us-central1
+  _AR_REPO: example-docker.pkg.dev/example/strapi-a5
+  _SERVICE: strapi-a5-service
+  _DEPLOY: "false"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: install
+    name: node:22-bookworm
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args: ["-c", "npm ci --no-audit --no-fund"]
+
+  - id: validate
+    name: node:22-bookworm
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args: ["-c", "npm run lint && npm test"]
+
+  - id: build
+    name: gcr.io/cloud-builders/docker
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        REVISION="$SHORT_SHA"
+        if [ "${_DEPLOY}" = "seed" ]; then REVISION=bootstrap; fi
+        if [ -z "$${REVISION}" ]; then REVISION=bootstrap; fi
+        echo "$${REVISION}" > /workspace/revision.txt
+        docker build --build-arg APP_REVISION="$${REVISION}" \
+          --label "org.opencontainers.image.revision=$COMMIT_SHA" \
+          -t "${_AR_REPO}/strapi:$${REVISION}" .
+
+  - id: push
+    name: gcr.io/cloud-builders/docker
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        if [ "${_DEPLOY}" = "false" ]; then echo 'PR: no se publica'; exit 0; fi
+        REVISION=$(cat /workspace/revision.txt)
+        docker push "${_AR_REPO}/strapi:$${REVISION}"
+
+  - id: deploy
+    name: gcr.io/google.com/cloudsdktool/google-cloud-cli:slim
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -euo pipefail
+        if [ "${_DEPLOY}" != "true" ]; then echo 'Sin despliegue'; exit 0; fi
+        REVISION=$(cat /workspace/revision.txt)
+        DIGEST=$(gcloud artifacts docker images describe "${_AR_REPO}/strapi:$${REVISION}" --format='value(image_summary.digest)')
+        test -n "$${DIGEST}"
+        gcloud run services describe "${_SERVICE}" --region "${_REGION}" --format=json \
+          | /usr/lib/google-cloud-sdk/platform/bundledpythonunix/bin/python3 scripts/previous-revision.py > /workspace/previous_revision.txt
+        gcloud run services update "${_SERVICE}" --region "${_REGION}" \
+          --image "${_AR_REPO}/strapi@$${DIGEST}"
+        gcloud run services update-traffic "${_SERVICE}" --region "${_REGION}" --to-latest
+
+  - id: smoke-and-rollback
+    name: gcr.io/google.com/cloudsdktool/google-cloud-cli:slim
+    dir: entrega/demo-strapi
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -uo pipefail
+        if [ "${_DEPLOY}" != "true" ]; then echo 'Sin smoke test'; exit 0; fi
+        REVISION=$(cat /workspace/revision.txt)
+        URL=$(gcloud run services describe "${_SERVICE}" --region "${_REGION}" --format='value(status.url)')
+        for i in $(seq 1 18); do
+          RESPONSE=$(curl -fsS --max-time 15 "$${URL}/api/health" 2>/dev/null || true)
+          if printf '%s' "$${RESPONSE}" | grep -q '"status":"ok"' && \
+             printf '%s' "$${RESPONSE}" | grep -q "\"revision\":\"$${REVISION}\""; then
+            echo "Smoke OK: $${URL}/api/health"; exit 0
+          fi
+          echo "Intento $${i}/18: $${RESPONSE}"
+          sleep 10
+        done
+        PREVIOUS=$(cat /workspace/previous_revision.txt)
+        echo "Smoke falló; restaurando tráfico a $${PREVIOUS}" >&2
+        gcloud run services update-traffic "${_SERVICE}" --region "${_REGION}" \
+          --to-revisions="$${PREVIOUS}=100"
+        exit 1
+
+timeout: 1800s

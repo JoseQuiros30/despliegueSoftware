@@ -1,0 +1,22 @@
+# Material local y repositorios de referencia: no forman parte de la entrega.
+/referencias/
+/cms-strapi-gcp/
+/.herramientas/
+
+# Credenciales, estado y artefactos generados.
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules/
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+**/*.tfvars.json
+!**/*.tfvars.example
+**/*.tfplan
+**/*.tfplan.*
+**/dist/
+**/build/
+**/.cache/
+.DS_Store

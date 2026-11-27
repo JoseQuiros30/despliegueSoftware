@@ -1,0 +1,7 @@
+project_id            = "TU_PROYECTO_GCP"
+region                = "us-central1"
+prefix                = "strapi-a5"
+initial_image         = "us-central1-docker.pkg.dev/TU_PROYECTO_GCP/strapi-a5/strapi:bootstrap"
+build_service_account = "strapi-a5-build@TU_PROYECTO_GCP.iam.gserviceaccount.com"
+db_tier               = "db-f1-micro"
+alert_emails          = ["TU_CORREO@EJEMPLO.COM"]

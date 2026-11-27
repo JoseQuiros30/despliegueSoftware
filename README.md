@@ -1,0 +1,19 @@
+# Actividad 5 · Strapi, Terraform, CI/CD y observabilidad
+
+Repositorio de la entrega académica. La solución está en [`entrega/`](entrega/):
+
+| Ruta | Contenido |
+| --- | --- |
+| [`entrega/demo-strapi/`](entrega/demo-strapi/) | CMS Strapi 5, pruebas y Cloud Build |
+| [`entrega/iac-strapi-gcp-cicd/`](entrega/iac-strapi-gcp-cicd/) | Terraform para Google Cloud |
+| [`entrega/documentacion/`](entrega/documentacion/) | Informe y guías de implementación |
+| [`entrega/evidencias/`](entrega/evidencias/) | Capturas reales y validaciones locales |
+
+**Inicio:** abre la [guía para principiantes](entrega/documentacion/GUIA_PRINCIPIANTES.md)
+o la [guía interactiva](entrega/documentacion/GUIA_INTERACTIVA.html). La
+[guía de costos y despliegue](entrega/documentacion/GUIA_PASO_A_PASO.md) indica
+qué revisar antes de crear recursos facturables.
+
+Los proyectos de referencia y las herramientas instaladas localmente quedan
+fuera de este repositorio. Ningún recurso de Google Cloud se ha aprovisionado
+como parte de la preparación local.
