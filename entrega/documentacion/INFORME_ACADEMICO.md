@@ -11,8 +11,9 @@ en Terraform. La aplicación funciona localmente con SQLite; la arquitectura de
 nube usa Cloud Run, Cloud SQL PostgreSQL, Artifact Registry, Secret Manager,
 Cloud Build, Monitoring y Logging. La Opción A se implementa con triggers de PR
 y `main`, despliegue por digest y rollback de tráfico tras un smoke test fallido.
-La infraestructura se validó localmente; no se crearon recursos GCP ni se
-obtuvieron aún evidencias de nube.
+Se ejecutaron validaciones locales y una demostración real en GCP: Terraform
+aplicó la infraestructura, Cloud Build ejecutó los triggers de PR y `main`, y
+Cloud Run sirvió el artículo y un archivo persistente tras cambiar de revisión.
 
 ## Contexto y metodología
 
@@ -92,13 +93,14 @@ El arranque sí se comprobó en Cloud Run: la revisión está lista, Cloud SQL f
 El usuario publicó un artículo desde el panel y la API pública lo devolvió
 correctamente desde Cloud SQL.
 
-## Resultados verificables y pendientes
+## Resultados verificables
 
 Las pruebas locales de lint, modelo, compilación del panel y `terraform validate`
 se documentan en `REVISION_REQUISITOS.md`. La aplicación de bootstrap e infra, el
 build inicial exitoso, Cloud SQL, Cloud Run, un artículo publicado y observabilidad
-IaC constan en `../evidencias/VALIDACIONES_GCP.md`. La prueba PR/main y la
-persistencia entre revisiones están pendientes. No se presentan
+IaC constan en `../evidencias/VALIDACIONES_GCP.md`. El build de PR pasó sin
+desplegar y el de `main` publicó la segunda revisión con smoke exitoso. El
+artículo y la imagen siguieron disponibles después del cambio. No se presentan
 capturas ficticias.
 
 ## Conclusiones
@@ -107,8 +109,13 @@ La solución convierte el patrón de clase en una arquitectura Strapi más corta
 económica para la Opción A. La separación bootstrap/infra permite auditar el plan
 antes de crear Cloud SQL; el pipeline distingue PR de despliegue y prepara
 rollback. La validación local cubre sintaxis y arranque SQLite; la prueba real
-confirmó el arranque de Strapi conectado a Cloud SQL y la publicación de un
-artículo. Falta comprobar la persistencia tras el despliegue por CI/CD.
+confirmó el arranque de Strapi conectado a Cloud SQL, la publicación de un
+artículo y la persistencia de datos y medios tras el despliegue por CI/CD.
+Tras registrar las evidencias se eliminaron Cloud SQL, Cloud Run, los buckets,
+Artifact Registry, secretos, triggers y la conexión GitHub. Las consultas
+finales de GCP y ambos estados Terraform quedaron vacíos. El contenido de la
+demostración en la nube ya no está disponible; las capturas y los resultados
+quedaron en el repositorio.
 
 ## Referencias
 

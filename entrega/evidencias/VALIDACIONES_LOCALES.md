@@ -1,5 +1,8 @@
 # Validaciones locales reales · 26 de noviembre de 2026
 
+Registro histórico previo al aprovisionamiento. Las pruebas de nube del 27 de
+noviembre están en [VALIDACIONES_GCP.md](VALIDACIONES_GCP.md).
+
 La aplicación se basó en `cms-strapi-gcp` (commit `a9b7e50`). El esquema
 `Artículo` de la entrega es idéntico al original y `git status --porcelain`
 del repositorio fuente quedó vacío.
@@ -18,11 +21,13 @@ del repositorio fuente quedó vacío.
 | `terraform fmt -check -recursive` | Correcto en bootstrap e infra |
 | `terraform validate` | Correcto en bootstrap e infra; infra usa proveedor Google 7.46.2 para opciones del montaje GCS |
 
-La construcción de la imagen Docker, Cloud SQL, Cloud Storage FUSE, los triggers
-y los dashboards requieren verificación posterior en GCP. Docker no está
-instalado localmente. No se ejecutaron `terraform plan` con credenciales,
-`apply`, `destroy` ni builds en GCP; no se crearon recursos facturables.
+En esta etapa inicial, la construcción de la imagen Docker, Cloud SQL, Cloud
+Storage FUSE, los triggers y los dashboards requerían verificación posterior
+en GCP. Docker no estaba instalado localmente. Hasta esa fecha no se habían
+ejecutado `terraform plan` con credenciales, `apply`, `destroy` ni builds en
+GCP; aún no se habían creado recursos facturables.
 
 Las carpetas generadas (`node_modules`, `.terraform`, `dist`, `build`, `.tmp`)
-y el `.env` local se eliminaron de la entrega tras las validaciones. Las
-capturas de nube están pendientes de ejecución real y no se simularon.
+y el `.env` local se eliminaron de la entrega tras las validaciones iniciales.
+Las pruebas y capturas de nube se realizaron después y constan en
+`VALIDACIONES_GCP.md`.

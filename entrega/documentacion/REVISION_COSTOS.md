@@ -1,10 +1,9 @@
 # Revisión de costos antes del despliegue
 
-**Estado:** el proyecto `project-792d22c1-bc11-403b-96c` está desplegado en
-`us-central1` para la demostración. Esta estimación se basa en tarifas
-publicadas; no es una cotización ni una factura. Bootstrap, Cloud Build e
-infraestructura ya se aplicaron. Cloud SQL comienza a generar cargos desde su
-creación, por lo que se debe destruir al finalizar las evidencias.
+**Estado:** la demostración en `project-792d22c1-bc11-403b-96c`, región
+`us-central1`, terminó y los recursos activos se eliminaron el 27 de noviembre
+de 2026. Esta estimación se basa en tarifas publicadas; no es una cotización
+ni una factura. Cloud SQL, el costo fijo principal, ya no figura en el proyecto.
 
 El proyecto para la práctica es `project-792d22c1-bc11-403b-96c` y el usuario
 confirmó que tiene vinculada la cuenta «Mi cuenta de facturación». La pantalla
@@ -12,7 +11,7 @@ de **Crear una instancia** de Compute Engine mostraba una VM `e2-medium` con
 estimación de USD 25,46/mes: **esa VM no pertenece a este diseño y debe
 cancelarse**. La infraestructura prevista se enumera abajo.
 
-## Recursos desplegados
+## Recursos usados durante la demostración
 
 | Componente | Configuración en Terraform | Costo que se debe vigilar |
 | --- | --- | --- |
@@ -59,5 +58,7 @@ incluye el bucket temporal de Cloud Build y su conexión GitHub.
    `terraform plan` y el costo antes de cualquier `apply`.
 
 El usuario confirmó proyecto, facturación, presupuesto y autenticación; se
-revisaron ambos planes Terraform antes de aplicar. La eliminación queda para
-después de las pruebas y capturas, siguiendo la guía vinculada arriba.
+revisaron ambos planes Terraform antes de aplicar. La eliminación se completó
+después de las pruebas y capturas; los comandos y resultados constan en
+`../evidencias/VALIDACIONES_GCP.md`. Puede haber uso residual de almacenamiento
+recuperable durante el periodo de retención de Cloud Storage.

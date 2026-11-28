@@ -15,6 +15,20 @@ Fecha: 27 de noviembre de 2026 (Colombia).
 | Administración | `GET /admin` → 200 |
 | Medios persistentes | Imagen subida desde Media Library; original y cuatro tamaños en el bucket de uploads; URL `/uploads/1_1_c719ce111e.png` → 200, `image/png` |
 | Observabilidad | Dashboard, uptime check, dos métricas de logs y siete políticas de alerta creadas |
+| CI en Pull Request | Build `9711adfc-0b08-4f39-a5e3-352268cef253`: `SUCCESS`, `_DEPLOY=false`; logs `PR: no se publica` y `Sin despliegue`; health permaneció en `bootstrap` |
+| CD en main | Build `7b7b79f7-a5a4-4833-ad43-8f859bd2b4db`: `SUCCESS`, `_DEPLOY=true`; imagen publicada, tráfico redirigido y log `Smoke OK` |
+| Persistencia entre revisiones | Revisión nueva `strapi-a5-service-00002-rc6`; health cambió a `19c5536`; el mismo artículo siguió en la API y la imagen respondió 200 |
+
+Las evidencias principales correspondientes son `10-imagen-bootstrap.png`,
+`12a-cloud-run-listado.png`, `13a-cloud-sql-listado.png`,
+`16-cloud-articulo.png`, `17b-cloud-uploads.png`, `18-pr-build.png`,
+`19-main-build.png`, `19a-main-detalle.png`, `20-revisiones-cli.txt`,
+`21-persistencia.png`, `22-dashboard.png`,
+`23-uptime.png`, `24-alertas.png` y `26-cloud-run-eliminado.png`. La captura `19-main-build.png` muestra
+también el build del PR y el build inicial con estado exitoso.
+
+La consulta IAM posterior a la conexión de GitHub no devolvió miembros con
+`roles/secretmanager.admin`: el permiso temporal amplio se retiró.
 
 La primera aplicación de infra se detuvo al crear la métrica de errores porque
 el filtro de Cloud Logging tenía `resource.label.service_name`. Se corrigió a
@@ -26,8 +40,33 @@ agrega la API de Monitoring); no implica recrear recursos.
 La URL pública es
 `https://strapi-a5-service-h72ufsk6ga-uc.a.run.app`. El artículo fue creado
 desde el panel por el usuario y consultado desde la API pública. La prueba de
-pipeline PR/main se registrará al completarse. La prueba de medios confirma
-escritura en GCS FUSE y lectura pública a través del servicio; la persistencia
-entre revisiones se verificará después de CI/CD.
-Los recursos facturables deben eliminarse siguiendo
-`../documentacion/GUIA_ELIMINACION_RECURSOS.md` después de las capturas.
+medios confirma escritura en GCS FUSE y lectura pública a través del servicio.
+Ambos datos permanecieron disponibles después del despliegue desde `main`.
+El dashboard mostró datos reales de solicitudes, latencia, CPU, memoria y
+conexiones PostgreSQL; los paneles de errores permanecieron vacíos al no haber
+incidentes registrados.
+
+## Eliminación y verificación final
+
+Tras las capturas se borraron las cinco variantes de la imagen de prueba y se
+aplicó el plan de destrucción de infra (`0 add, 0 change, 54 destroy`). Ese
+primer intento borró Cloud Run, Monitoring, bucket y secretos, pero el borrado
+del usuario PostgreSQL falló porque Strapi todavía tenía objetos propios. La
+base ya se había eliminado; al recalcular el plan quedaron 13 recursos y el
+segundo `apply` terminó con `13 destroyed`. Cloud SQL terminó de eliminarse.
+
+El estado de infra quedó vacío. Se borraron todas las versiones de objetos
+`strapi-a5/infra/` del bucket de estado y se aplicó el plan de destrucción de
+bootstrap (`0 add, 0 change, 21 destroy`), que terminó con `21 destroyed`.
+Después se eliminó la conexión manual `github` de Cloud Build y el bucket
+temporal `${PROJECT_ID}_cloudbuild`, que contenía un solo archivo fuente de
+esta actividad.
+
+Las consultas finales de `gcloud sql instances list`, `gcloud run services
+list`, `gcloud artifacts repositories list`, `gcloud builds triggers list`,
+`gcloud builds connections list`, `gcloud secrets list` y `gcloud storage
+buckets list` no devolvieron recursos activos de la actividad. Los comandos
+`terraform state list` en `infra/` y `bootstrap/` tampoco devolvieron
+recursos. Se conservó la protección de borrado recuperable de Cloud Storage;
+puede quedar almacenamiento residual durante su periodo de retención. La
+facturación puede reflejar cargos ya incurridos con retraso.

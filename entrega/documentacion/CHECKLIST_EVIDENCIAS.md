@@ -30,13 +30,13 @@ corresponda; ocultar credenciales, `.env`, estados y valores secretos.
 | `17c-cloud-health.png` | Health HTTPS con `status: ok` | 7 |
 | `18-pr-build.png` | PR Build History exitoso | 8 |
 | `19-main-build.png` | Main Build History exitoso | 8 |
-| `20-revisiones.png` | Dos revisiones Cloud Run | 8 |
+| `20-revisiones-cli.txt` | Salida real de `gcloud` con dos revisiones listas; sustituye la captura visual | 8 |
 | `21-persistencia.png` | Artículo y archivo tras desplegar | 8 |
 | `22-dashboard.png` | Gráficas con datos | 9 |
 | `23-uptime.png` | Uptime check | 9 |
 | `24-alertas.png` | Políticas IaC | 9 |
 | `25-logs.png` | Logs reales Cloud Run/Build | 9 |
-| `26-recursos-eliminados.png` | Sin recursos facturables activos | 10 |
+| `26-cloud-run-eliminado.png`, `VALIDACIONES_GCP.md` | Servicio retirado y consultas finales sin recursos activos | 10 |
 | `27-envio-correo.png` | Correo académico enviado con enlaces y adjuntos | 11 |
 
 Las capturas de errores o alertas incidentales no se deben fabricar. Si una

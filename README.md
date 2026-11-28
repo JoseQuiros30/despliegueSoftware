@@ -15,7 +15,8 @@ o la [guía interactiva](entrega/documentacion/GUIA_INTERACTIVA.html). La
 qué revisar antes de crear recursos facturables.
 
 Los proyectos de referencia y las herramientas instaladas localmente quedan
-fuera de este repositorio. El proyecto GCP de demostración está desplegado:
-Cloud Run y Cloud SQL responden correctamente. Al terminar las evidencias,
-seguir la [guía de eliminación](entrega/documentacion/GUIA_ELIMINACION_RECURSOS.md)
-para detener los costos.
+fuera de este repositorio. La demostración real en GCP se completó y los
+recursos se eliminaron el 27 de noviembre de 2026. Los resultados y capturas
+quedaron en [`entrega/evidencias/`](entrega/evidencias/); la
+[guía de eliminación](entrega/documentacion/GUIA_ELIMINACION_RECURSOS.md)
+permite repetir la limpieza tras un nuevo despliegue.

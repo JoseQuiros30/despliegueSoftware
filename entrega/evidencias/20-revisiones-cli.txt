@@ -1,0 +1,3 @@
+NAME                         STATUS
+strapi-a5-service-00002-rc6  True
+strapi-a5-service-00001-nnx  True

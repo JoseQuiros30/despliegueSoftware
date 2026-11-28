@@ -7,10 +7,11 @@ la palabra `TU_CORREO` literalmente: reemplázala con tu dirección real.
 El ID del proyecto ya está indicado. Si cierras Terminal, vuelve a definir
 las variables del paso 4.
 
-La solución fue validada localmente y está desplegada en GCP para la
-demostración. Los pasos 1 a 6 documentan cómo reproducir lo ya ejecutado;
-continúa con las pruebas del servicio y, al terminar, con la eliminación.
-Cloud SQL factura mientras exista. La base
+La solución fue validada localmente y demostrada en GCP. Después de las
+capturas se eliminaron sus recursos activos; los pasos siguientes permiten
+reproducirla desde cero. Revisa el plan y el presupuesto antes de un nuevo
+despliegue y vuelve a eliminar los recursos al terminar. Cloud SQL factura
+mientras exista. La base
 estimada en `us-central1` para 48 horas es USD 0,62 por instancia `db-f1-micro`
 y 10 GiB HDD; no incluye builds, imágenes, buckets, secretos, red ni impuestos.
 [Precios oficiales](https://cloud.google.com/sql/pricing?hl=en). Un presupuesto

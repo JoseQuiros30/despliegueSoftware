@@ -5,9 +5,10 @@ y versionado para el estado, Artifact Registry, cuenta de Cloud Build y triggers
 aplicación. `infra/` crea Cloud SQL PostgreSQL, secretos, Cloud Run, bucket de
 uploads y observabilidad.
 
-**Estado actual:** bootstrap e infra aplicados en
-`project-792d22c1-bc11-403b-96c`. Cloud Run y Cloud SQL están listos; la
-prueba de PR/main y la eliminación quedan pendientes.
+**Estado actual:** la demostración en `project-792d22c1-bc11-403b-96c`
+terminó. Los builds de PR y `main` pasaron y artículo y archivo persistieron
+entre revisiones. Después se destruyeron infra y bootstrap; Cloud SQL,
+Cloud Run y los demás recursos de la práctica ya no figuran como activos.
 
 ## Orden de despliegue
 

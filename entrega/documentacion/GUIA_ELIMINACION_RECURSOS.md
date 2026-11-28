@@ -5,7 +5,8 @@ elimina artículos y administradores. El bucket de uploads conserva archivos y
 debe vaciarse antes de destruir infra; el bucket de estado contiene secretos.
 
 ```bash
-export PROJECT_ID=TU_PROYECTO_GCP
+export PATH="/Applications/MAMP/htdocs/despliegueSoftware/.herramientas:/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
+export PROJECT_ID=project-792d22c1-bc11-403b-96c
 export PREFIX=strapi-a5
 gcloud storage ls --recursive "gs://$PROJECT_ID-$PREFIX-uploads/"
 gcloud storage rm --recursive "gs://$PROJECT_ID-$PREFIX-uploads/*"
@@ -15,6 +16,15 @@ terraform init -reconfigure -backend-config="bucket=$PROJECT_ID-$PREFIX-tfstate"
 terraform plan -destroy -var-file=env/prod.tfvars -out=destroy.tfplan
 terraform show destroy.tfplan
 terraform apply destroy.tfplan
+```
+
+Si Terraform informa que no puede borrar el usuario `strapi` porque posee
+objetos de la base, y el registro confirma que la base ya se borró, recalcular
+el plan de destrucción y aplicarlo otra vez:
+
+```bash
+terraform plan -destroy -var-file=env/prod.tfvars -out=destroy-retry.tfplan
+terraform apply destroy-retry.tfplan
 ```
 
 Confirmar en la consola que Cloud Run y Cloud SQL ya no aparecen. El estado

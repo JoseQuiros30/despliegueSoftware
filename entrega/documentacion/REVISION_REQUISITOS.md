@@ -5,14 +5,14 @@
 | Terraform modular | `bootstrap/`, `infra/modules/` | Ambos `apply` completados; corrección del filtro de logs aplicada |
 | Servicio contenerizado | Dockerfile Strapi + Cloud Run | Imagen construida en Cloud Build; revisión `Ready`; health HTTPS 200 |
 | Base relacional administrada | Cloud SQL PostgreSQL 16, DB y usuario | Instancia `strapi-a5-pg-496f8a` `RUNNABLE`; API responde |
-| CI/CD Opción A | Cloud Build PR/main, `_DEPLOY`, digest, smoke y rollback | Triggers creados; build inicial exitoso; prueba PR/main pendiente |
+| CI/CD Opción A | Cloud Build PR/main, `_DEPLOY`, digest, smoke y rollback | PR y main exitosos; PR no desplegó; main cambió la revisión y pasó smoke |
 | Estado remoto | Bucket GCS privado y versionado | Creado y utilizado por Terraform infra |
 | Medios persistentes | Bucket privado y montaje GCS FUSE en `public/uploads` | Imagen y variantes presentes en GCS; URL HTTPS respondió 200 |
 | Secretos e IAM | Secret Manager, cuentas y permisos | Creados por Terraform; acceso de ejecución comprobado al arrancar |
-| Observabilidad IaC | Dashboard, uptime, 7 alertas, logs | Recursos creados; revisar señales del tráfico real |
+| Observabilidad IaC | Dashboard, uptime, 7 alertas, logs | Dashboard con señales reales de Cloud Run y PostgreSQL |
 | CMS y Artículo | Strapi 5 TypeScript desde `cms-strapi-gcp` | Artículo publicado en GCP y visible en la API pública |
-| Persistencia entre revisiones | PostgreSQL externo al contenedor | Prueba entre dos revisiones pendiente |
-| Evidencias reales | `evidencias/` y checklist | Build inicial capturado; demás pantallas pendientes |
+| Persistencia entre revisiones | PostgreSQL externo al contenedor | Artículo y archivo siguieron disponibles tras CD |
+| Evidencias reales | `evidencias/` y checklist | Build, PR, CMS, dashboard y limpieza documentados; registro CLI de las dos revisiones |
 
 **Validaciones ejecutadas:** `npm ci`, `npm run lint`, `npm test`, `npm run build`,
 pruebas HTTP locales, `terraform fmt -check -recursive` y `terraform validate`
