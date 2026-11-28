@@ -70,3 +70,9 @@ buckets list` no devolvieron recursos activos de la actividad. Los comandos
 recursos. Se conservó la protección de borrado recuperable de Cloud Storage;
 puede quedar almacenamiento residual durante su periodo de retención. La
 facturación puede reflejar cargos ya incurridos con retraso.
+
+La auditoría posterior amplió el inventario a VM, discos, IP, imágenes,
+Pub/Sub y BigQuery, sin encontrar recursos activos. Con autorización del
+usuario se desvinculó la facturación solo de este proyecto; la consulta final
+devolvió `billingEnabled: false`. Ver
+`AUDITORIA_COSTOS_2026-11-27.md`.

@@ -14,9 +14,14 @@ o la [guía interactiva](entrega/documentacion/GUIA_INTERACTIVA.html). La
 [guía de costos y despliegue](entrega/documentacion/GUIA_PASO_A_PASO.md) indica
 qué revisar antes de crear recursos facturables.
 
+**Entrega académica:** [informe con capturas en PDF](entrega/documentacion/INFORME_CON_EVIDENCIAS.pdf),
+[texto del correo](entrega/documentacion/CORREO_ENTREGA.md) y
+[auditoría final de costos](entrega/evidencias/AUDITORIA_COSTOS_2026-11-27.md).
+
 Los proyectos de referencia y las herramientas instaladas localmente quedan
 fuera de este repositorio. La demostración real en GCP se completó y los
-recursos se eliminaron el 27 de noviembre de 2026. Los resultados y capturas
+recursos se eliminaron el 27 de noviembre de 2026 y la facturación de ese
+proyecto quedó deshabilitada. Los resultados y capturas
 quedaron en [`entrega/evidencias/`](entrega/evidencias/); la
 [guía de eliminación](entrega/documentacion/GUIA_ELIMINACION_RECURSOS.md)
 permite repetir la limpieza tras un nuevo despliegue.

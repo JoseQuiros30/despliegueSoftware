@@ -20,6 +20,8 @@ Los resultados técnicos y los identificadores de los builds están en
 `VALIDACIONES_GCP.md`. El historial de revisiones se guardó como salida real de
 `gcloud`; no hay captura visual de esa pantalla. El listado completo de posibles
 capturas se encuentra en `../documentacion/CHECKLIST_EVIDENCIAS.md`.
+La comprobación final de facturación se documenta en
+`AUDITORIA_COSTOS_2026-11-27.md`.
 
 No incluir contraseñas, tokens, variables secretas ni el contenido de los
 estados Terraform.

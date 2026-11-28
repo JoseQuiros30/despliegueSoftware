@@ -1,7 +1,7 @@
 # Actividad 5 — IaC, CI/CD y observabilidad para un CMS Strapi
 
 **Programa:** Ingeniería de Sistemas · Despliegue de Software · ITM
-**Grupo:** Mariana Villegas Ochoa, Luis David Lopera Parra y Jose Ricardo Quiros Garcia
+**Grupo:** Mariana Villegas Ochoa, Luis David Lopera y Jose Ricardo Quiros García
 **Fecha de entrega:** 27 de noviembre de 2026
 
 ## Resumen
@@ -115,7 +115,10 @@ Tras registrar las evidencias se eliminaron Cloud SQL, Cloud Run, los buckets,
 Artifact Registry, secretos, triggers y la conexión GitHub. Las consultas
 finales de GCP y ambos estados Terraform quedaron vacíos. El contenido de la
 demostración en la nube ya no está disponible; las capturas y los resultados
-quedaron en el repositorio.
+quedaron en el repositorio. El proyecto se desvinculó de la facturación y la
+consulta final devolvió `billingEnabled: false`; esta acción no elimina cargos
+incurridos antes de la desvinculación. El detalle está en
+`../evidencias/AUDITORIA_COSTOS_2026-11-27.md`.
 
 ## Referencias
 

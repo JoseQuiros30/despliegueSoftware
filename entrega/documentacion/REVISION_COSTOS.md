@@ -2,8 +2,10 @@
 
 **Estado:** la demostración en `project-792d22c1-bc11-403b-96c`, región
 `us-central1`, terminó y los recursos activos se eliminaron el 27 de noviembre
-de 2026. Esta estimación se basa en tarifas publicadas; no es una cotización
-ni una factura. Cloud SQL, el costo fijo principal, ya no figura en el proyecto.
+de 2026. Después se desvinculó la facturación del proyecto: la comprobación
+final devolvió `billingEnabled: false`. Esta estimación se basa en tarifas
+publicadas; no es una cotización ni una factura. Cloud SQL ya no figura en el
+proyecto.
 
 El proyecto para la práctica es `project-792d22c1-bc11-403b-96c` y el usuario
 confirmó que tiene vinculada la cuenta «Mi cuenta de facturación». La pantalla
@@ -60,5 +62,6 @@ incluye el bucket temporal de Cloud Build y su conexión GitHub.
 El usuario confirmó proyecto, facturación, presupuesto y autenticación; se
 revisaron ambos planes Terraform antes de aplicar. La eliminación se completó
 después de las pruebas y capturas; los comandos y resultados constan en
-`../evidencias/VALIDACIONES_GCP.md`. Puede haber uso residual de almacenamiento
-recuperable durante el periodo de retención de Cloud Storage.
+`../evidencias/VALIDACIONES_GCP.md`. La auditoría final está en
+`../evidencias/AUDITORIA_COSTOS_2026-11-27.md`. El estado de cuenta puede
+reflejar con retraso el uso anterior a desactivar la facturación.

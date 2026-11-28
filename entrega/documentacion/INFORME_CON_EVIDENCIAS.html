@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actividad 5 · Informe con evidencias</title>
+<style>
+@page { size: A4 landscape; margin: 12mm 15mm; }
+* { box-sizing: border-box; }
+body { margin: 0; color: #17233a; font: 11pt/1.42 Georgia, "Times New Roman", serif; }
+a { color: #174a84; overflow-wrap: anywhere; }
+h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; line-height: 1.18; }
+h1 { font-size: 24pt; margin: 0 0 7mm; }
+h2 { font-size: 16pt; color: #163d68; margin: 0 0 5mm; }
+h3 { font-size: 11pt; color: #163d68; margin: 0 0 2mm; }
+p { margin: 0 0 3mm; }
+.page { break-after: page; }
+.page:last-child { break-after: auto; }
+.cover { padding: 29mm 13mm 0; text-align: center; }
+.cover .eyebrow { color: #49627d; font: bold 12pt Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.cover .rule { height: 2px; background: #315e8b; width: 110mm; margin: 8mm auto; }
+.cover .names { font-size: 13pt; line-height: 1.8; margin: 12mm 0; }
+.cover .meta { color: #46566d; font-size: 11pt; }
+.summary { padding: 3mm 4mm; }
+.summary table, .audit table { border-collapse: collapse; width: 100%; margin: 4mm 0; font-size: 9.2pt; }
+th, td { border: 1px solid #bac9d8; padding: 2mm 3mm; vertical-align: top; }
+th { background: #e8eef5; text-align: left; font-family: Arial, sans-serif; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+.evidence { padding: 2mm 3mm; }
+.evidence .tag { color: #49627d; font: bold 9pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+.evidence figure { margin: 4mm 0 0; }
+.evidence img { display: block; max-width: 100%; max-height: 143mm; margin: 0 auto; object-fit: contain; border: 1px solid #c6d0dc; }
+.evidence figcaption { margin-top: 3mm; color: #354761; font-size: 9.5pt; }
+.evidence .source { color: #69788b; font: 8pt Arial, sans-serif; margin-top: 1mm; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.duo img { max-height: 127mm; }
+.duo figure { min-width: 0; }
+pre { padding: 3mm 4mm; background: #edf2f7; border: 1px solid #c6d0dc; font: 10pt/1.5 Menlo, Consolas, monospace; white-space: pre-wrap; }
+.note { padding: 3mm 4mm; background: #edf2f7; border-left: 3px solid #315e8b; }
+.small { font-size: 9pt; }
+@media screen { body { max-width: 1100px; margin: auto; background: #f1f4f8; } .page { background: white; padding: 15mm; margin: 12mm 0; min-height: 185mm; box-shadow: 0 2px 10px #c7d0da; } }
+</style>
+</head>
+<body>
+<section class="page cover">
+  <div class="eyebrow">Instituto Tecnológico Metropolitano · Despliegue de Software</div>
+  <div class="rule"></div>
+  <h1>Actividad 5<br>Infraestructura como código, CI/CD y observabilidad</h1>
+  <p style="font-size:14pt">Implementación y evidencias de un CMS Strapi en Google Cloud</p>
+  <div class="names"><strong>Integrantes</strong><br>
+    Mariana Villegas Ochoa<br>
+    Luis David Lopera<br>
+    Jose Ricardo Quiros García</div>
+  <div class="rule"></div>
+  <p class="meta">Grupo 3 · 27 de noviembre de 2026 · Medellín, Colombia</p>
+</section>
+
+<section class="page summary">
+  <h2>1. Resumen del trabajo</h2>
+  <p>Se adaptó un CMS Strapi 5 con el modelo <em>Artículo</em> y se definió su infraestructura en Terraform. La aplicación se probó primero en el computador con SQLite. Luego se desplegó en Google Cloud Run con PostgreSQL administrado en Cloud SQL, secretos en Secret Manager y archivos en Cloud Storage. Cloud Build construyó la imagen y ejecutó un flujo de CI/CD: el Pull Request validó sin desplegar y la fusión a <code>main</code> creó una nueva revisión. Monitoring y Logging permitieron observar salud, solicitudes, métricas y alertas.</p>
+  <p>La prueba real confirmó un artículo publicado, una imagen cargada y la permanencia de ambos tras el despliegue de <code>main</code>. Al concluir, se eliminaron los recursos de la demostración y se desvinculó la facturación del proyecto. Por eso la URL de Cloud Run ya no está activa.</p>
+  <div class="two">
+    <div>
+      <h3>Arquitectura y decisiones</h3>
+      <p>GitHub → Cloud Build → Artifact Registry → Cloud Run (Strapi). Cloud Run consultó Cloud SQL PostgreSQL y Secret Manager; un bucket privado guardó los medios. Terraform separó <code>bootstrap</code> e <code>infra</code>. Se usó una sola instancia máxima de Cloud Run y una base <code>db-f1-micro</code> para una demostración corta.</p>
+      <h3>Validaciones</h3>
+      <p>Se ejecutaron <code>npm run lint</code>, <code>npm test</code>, <code>npm run build</code> y <code>terraform validate</code>. El build del PR y el de <code>main</code> terminaron en <code>SUCCESS</code>. La API devolvió el artículo antes y después del cambio de revisión; el chequeo de salud respondió HTTP 200.</p>
+    </div>
+    <div>
+      <h3>Enlaces de comprobación</h3>
+      <p>Repositorio: <a href="https://github.com/JoseQuiros30/despliegueSoftware">github.com/JoseQuiros30/despliegueSoftware</a><br>
+      Pull Request #1: <a href="https://github.com/JoseQuiros30/despliegueSoftware/pull/1">github.com/JoseQuiros30/despliegueSoftware/pull/1</a><br>
+      Todas las capturas: <a href="https://github.com/JoseQuiros30/despliegueSoftware/tree/main/entrega/evidencias">entrega/evidencias en GitHub</a><br>
+      Guía interactiva: <a href="https://github.com/JoseQuiros30/despliegueSoftware/blob/main/entrega/documentacion/GUIA_INTERACTIVA.html">GUIA_INTERACTIVA.html</a></p>
+      <h3>Alcance de este documento</h3>
+      <p>Las páginas siguientes presentan capturas reales seleccionadas y explican qué demuestra cada una. Los resultados completos, comandos e identificadores están en <code>VALIDACIONES_GCP.md</code> y <code>AUDITORIA_COSTOS_2026-11-27.md</code>.</p>
+    </div>
+  </div>
+  <p class="note small"><strong>Nota sobre costos:</strong> se comprobó <code>billingEnabled: false</code> para el proyecto <code>project-792d22c1-bc11-403b-96c</code>. Esta verificación no equivale a un estado de cuenta: Google puede registrar más tarde consumo anterior a la desvinculación.</p>
+</section>
+
+<section class="page evidence"><div class="tag">Evidencia 1 · Validación local</div><h2>Strapi inició y pasó las pruebas locales</h2>
+  <figure><img src="../evidencias/01b-local-arranque.png" alt="Arranque y prueba local de Strapi"><figcaption>El CMS inició en el entorno local; el registro muestra la ejecución de pruebas y la compilación del panel.</figcaption><div class="source">Archivo: 01b-local-arranque.png</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 2 · Modelo de contenido</div><h2>Artículo en el CMS local</h2>
+  <figure><img src="../evidencias/02-local-articulo.png" alt="Artículo local en Strapi"><figcaption>Se conservó el modelo Artículo de la aplicación base y se comprobó su manejo desde el administrador de Strapi.</figcaption><div class="source">Archivo: 02-local-articulo.png</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 3 · Imagen inicial</div><h2>Cloud Build construyó la imagen de Strapi</h2>
+  <figure><img src="../evidencias/10-imagen-bootstrap.png" alt="Build bootstrap de Cloud Build"><figcaption>El build inicial validó el proyecto y publicó la imagen de contenedor necesaria para crear el primer servicio Cloud Run.</figcaption><div class="source">Archivo: 10-imagen-bootstrap.png · Build cb93a1ac-fc2e-43de-847a-64a515ff0ec2</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencias 4 y 5 · Infraestructura</div><h2>Servicio y base de datos creados con Terraform</h2>
+  <div class="duo">
+    <figure><img src="../evidencias/12a-cloud-run-listado.png" alt="Servicio Cloud Run activo"><figcaption>Cloud Run mostró el servicio <code>strapi-a5-service</code> listo para atender HTTPS.</figcaption><div class="source">Archivo: 12a-cloud-run-listado.png</div></figure>
+    <figure><img src="../evidencias/13a-cloud-sql-listado.png" alt="Instancia Cloud SQL activa"><figcaption>Cloud SQL mostró la instancia PostgreSQL <code>strapi-a5-pg-496f8a</code> en ejecución.</figcaption><div class="source">Archivo: 13a-cloud-sql-listado.png</div></figure>
+  </div>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 6 · CMS en la nube</div><h2>Artículo publicado en Cloud Run</h2>
+  <figure><img src="../evidencias/16-cloud-articulo.png" alt="Artículo publicado en Strapi cloud"><figcaption>El administrador de Strapi desplegado mostró el artículo de prueba publicado y respaldado por PostgreSQL.</figcaption><div class="source">Archivo: 16-cloud-articulo.png</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 7 · Medios persistentes</div><h2>Imagen cargada en Media Library</h2>
+  <figure><img src="../evidencias/17b-cloud-uploads.png" alt="Imagen cargada en Strapi"><figcaption>La imagen subida desde Strapi se guardó en el bucket privado de uploads y fue accesible a través del servicio.</figcaption><div class="source">Archivo: 17b-cloud-uploads.png</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 8 · Integración continua</div><h2>El Pull Request validó sin publicar</h2>
+  <figure><img src="../evidencias/18-pr-build.png" alt="Build exitoso del Pull Request"><figcaption>El trigger de PR terminó correctamente. Su configuración <code>_DEPLOY=false</code> ejecutó validación y build sin cambiar la revisión activa.</figcaption><div class="source">Archivo: 18-pr-build.png · Build 9711adfc-0b08-4f39-a5e3-352268cef253</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 9 · Flujo GitHub</div><h2>El Pull Request se fusionó a main</h2>
+  <figure><img src="../evidencias/18c-pr-fusionado.png" alt="Pull Request fusionado"><figcaption>El PR #1 quedó fusionado. Esa integración activó el pipeline de despliegue de la rama principal.</figcaption><div class="source">Archivo: 18c-pr-fusionado.png · <a href="https://github.com/JoseQuiros30/despliegueSoftware/pull/1">Ver PR</a></div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 10 · Despliegue continuo</div><h2>El build de main terminó en SUCCESS</h2>
+  <figure><img src="../evidencias/19-main-build.png" alt="Build exitoso de main"><figcaption>Cloud Build registró el trigger de <code>main</code> exitoso. La nueva imagen se desplegó y el smoke test terminó correctamente.</figcaption><div class="source">Archivo: 19-main-build.png · Build 7b7b79f7-a5a4-4833-ad43-8f859bd2b4db</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 11 · Persistencia</div><h2>El contenido sobrevivió al cambio de revisión</h2>
+  <figure><img src="../evidencias/21-persistencia.png" alt="API pública con artículo después del despliegue"><figcaption>La API pública siguió devolviendo el artículo publicado tras pasar de la revisión inicial a la segunda. La imagen también respondió HTTP 200.</figcaption><div class="source">Archivo: 21-persistencia.png</div></figure>
+  <pre>Revisiones verificadas con gcloud:
+strapi-a5-service-00002-rc6  True
+strapi-a5-service-00001-nnx  True</pre>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 12 · Observabilidad</div><h2>Dashboard con métricas reales</h2>
+  <figure><img src="../evidencias/22-dashboard.png" alt="Dashboard de observabilidad"><figcaption>El panel de Monitoring mostró solicitudes, latencia, uso de recursos y conexiones de PostgreSQL del servicio desplegado.</figcaption><div class="source">Archivo: 22-dashboard.png</div></figure>
+</section>
+<section class="page evidence"><div class="tag">Evidencias 13 y 14 · Supervisión</div><h2>Disponibilidad y siete políticas de alerta</h2>
+  <div class="duo">
+    <figure><img src="../evidencias/23-uptime.png" alt="Uptime check saludable"><figcaption>La verificación HTTPS de <code>/api/health</code> indicó disponibilidad.</figcaption><div class="source">Archivo: 23-uptime.png</div></figure>
+    <figure><img src="../evidencias/24-alertas.png" alt="Siete políticas de alerta"><figcaption>Monitoring registró siete políticas creadas por Terraform; no se fabricaron incidentes.</figcaption><div class="source">Archivo: 24-alertas.png</div></figure>
+  </div>
+</section>
+<section class="page evidence"><div class="tag">Evidencia 15 · Retiro de recursos</div><h2>El servicio Cloud Run ya no existe</h2>
+  <figure><img src="../evidencias/26-cloud-run-eliminado.png" alt="Cloud Run eliminado"><figcaption>Tras destruir la infraestructura, la consola informó que <code>strapi-a5-service</code> ya no existe. Las consultas CLI confirmaron además ausencia de Cloud SQL y de los demás recursos activos.</figcaption><div class="source">Archivo: 26-cloud-run-eliminado.png</div></figure>
+</section>
+
+<section class="page audit">
+  <h2>2. Conclusiones y control de costos</h2>
+  <p>La actividad cumplió la Opción A: infraestructura como código, aplicación contenerizada, base de datos relacional administrada, CI/CD de aplicación y observabilidad definida en Terraform. La ejecución real demostró el flujo completo de PR a <code>main</code> y la persistencia de contenido y medios entre revisiones.</p>
+  <table><tr><th>Verificación final</th><th>Resultado observado el 27 de noviembre de 2026</th></tr>
+    <tr><td>Recursos de la práctica</td><td>Sin VM, Cloud SQL, Cloud Run, repositorios, buckets activos, secretos, triggers, IP o discos.</td></tr>
+    <tr><td>Estado Terraform</td><td>Vacío en <code>infra/</code> y <code>bootstrap/</code>.</td></tr>
+    <tr><td>Facturación de este proyecto</td><td><code>billingEnabled: false</code>; cuenta de facturación desvinculada.</td></tr>
+    <tr><td>Retención recuperable</td><td>Tres buckets borrados permanecen visibles como recuperables durante el plazo configurado.</td></tr>
+  </table>
+  <p><strong>Límite de la auditoría:</strong> no se consultó un estado de cuenta monetario desde la CLI. Los cargos generados antes de desactivar facturación pueden aparecer después en los informes. Conviene revisar <a href="https://console.cloud.google.com/billing">Facturación → Informes</a> filtrando por este proyecto y las fechas de la práctica.</p>
+  <p><strong>Documentos de soporte:</strong> <a href="https://github.com/JoseQuiros30/despliegueSoftware/blob/main/entrega/evidencias/VALIDACIONES_GCP.md">validaciones GCP</a>, <a href="https://github.com/JoseQuiros30/despliegueSoftware/blob/main/entrega/evidencias/AUDITORIA_COSTOS_2026-11-27.md">auditoría de costos</a> y <a href="https://github.com/JoseQuiros30/despliegueSoftware/tree/main/entrega/evidencias">capturas originales</a>.</p>
+  <p class="small"><strong>Fuentes:</strong> Google Cloud, documentación de <a href="https://docs.cloud.google.com/billing/docs/how-to/modify-project">facturación por proyecto</a> y <a href="https://docs.cloud.google.com/storage/docs/soft-delete">borrado recuperable</a>; Strapi, <a href="https://docs.strapi.io/cms/configurations/database">configuración de base de datos</a>.</p>
+</section>
+</body>
+</html>
