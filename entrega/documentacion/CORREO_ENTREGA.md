@@ -20,7 +20,7 @@ los enlaces; no hace falta duplicar las 28 imágenes en el correo.
 > capturas originales.
 >
 > - Repositorio: https://github.com/JoseQuiros30/despliegueSoftware
-> - Informe con evidencias (PDF): https://github.com/JoseQuiros30/despliegueSoftware/blob/main/entrega/documentacion/INFORME_CON_EVIDENCIAS.pdf
+> - Informe con evidencias (descarga PDF): https://github.com/JoseQuiros30/despliegueSoftware/raw/refs/heads/main/entrega/documentacion/INFORME_CON_EVIDENCIAS.pdf
 > - Capturas originales: https://github.com/JoseQuiros30/despliegueSoftware/tree/main/entrega/evidencias
 > - Pull Request de CI/CD: https://github.com/JoseQuiros30/despliegueSoftware/pull/1
 >
